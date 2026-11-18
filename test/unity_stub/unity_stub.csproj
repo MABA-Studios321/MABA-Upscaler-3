@@ -1,0 +1,7 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup><TargetFramework>net8.0</TargetFramework><LangVersion>latest</LangVersion><Nullable>disable</Nullable><DefineConstants>ENABLE_LEGACY_INPUT_MANAGER</DefineConstants><NoWarn>CS0649;CS0169;CS0414;CS8981;CS0108;CS0067</NoWarn><EnableDefaultCompileItems>false</EnableDefaultCompileItems></PropertyGroup>
+  <ItemGroup>
+    <Compile Include="UnityStub.cs" />
+    <Compile Include="..\..\integrations\unity\com.maba.upscaler3\Runtime\*.cs" />
+  </ItemGroup>
+</Project>

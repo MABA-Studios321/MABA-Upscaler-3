@@ -1,0 +1,13 @@
+{
+  "name": "com.maba.upscaler3",
+  "version": "3.0.0-pre.1",
+  "displayName": "MABA Upscaler 3 (pre-alpha)",
+  "description": "PRE-ALPHA, never run in the Unity editor. Temporal super-resolution and Frame Generation (camera re-projection) for low-end mobile GPUs: render low with a jittered camera, accumulate at output resolution, sharpen. Falls back to a single-pass spatial upscale where depth is unavailable. Dynamic mode holds your frame rate.",
+  "unity": "2021.3",
+  "dependencies": { "com.unity.ugui": "1.0.0" },
+  "keywords": [ "upscaler", "mobile", "performance", "resolution", "temporal", "super-resolution" ],
+  "author": {
+    "name": "MABA Studios"
+  },
+  "license": "Apache-2.0"
+}

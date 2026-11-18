@@ -1,0 +1,14 @@
+{
+  "name": "Maba3Upscaler.Editor",
+  "rootNamespace": "Maba3.Editor",
+  "references": [ "Maba3Upscaler.Runtime" ],
+  "includePlatforms": [ "Editor" ],
+  "excludePlatforms": [],
+  "allowUnsafeCode": false,
+  "overrideReferences": false,
+  "precompiledReferences": [],
+  "autoReferenced": true,
+  "defineConstraints": [],
+  "versionDefines": [],
+  "noEngineReferences": false
+}

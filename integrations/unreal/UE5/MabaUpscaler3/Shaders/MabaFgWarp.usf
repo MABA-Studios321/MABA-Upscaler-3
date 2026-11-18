@@ -1,0 +1,26 @@
+// MABA Upscaler 3 - Unreal Frame Generation warp: draws a generated frame (the last real frame re-projected to the camera pose of
+// this frame) into the view's output. See MabaFgWarp.ush.
+// Copyright 2026 MABA Studios. SPDX-License-Identifier: Apache-2.0
+#include "/Engine/Public/Platform.ush"
+
+// Unreal: reversed-Z infinite far depth, screen rows run top to bottom (same as the temporal resolve).
+#define MABA_FG_DEPTH_MODE 1
+#define MABA_FG_Y_DOWN 1
+#include "/Plugin/MabaUpscaler3/MabaFgWarp.ush"
+
+Texture2D MabaShown;         // the last real frame (temporal result, output resolution)
+Texture2D MabaOutDepth;      // its depth, output resolution (device Z)
+SamplerState MabaLinearSampler;
+float4x4 MabaLastVP;         // column-vector form, in a space centred on this frame's camera
+float4x4 MabaLastInvVP;
+float4x4 MabaNewVP;
+float4x4 MabaNewInvVP;
+float4 MabaOutInfo;          // xy = output size, zw = 1 / output size
+float4 MabaOutputRect;       // xy = output rect min in pixels
+float4 MabaPresent;          // x = sharpen strength
+
+void MainPS(float4 SvPosition : SV_POSITION, out float4 OutColor : SV_Target0)
+{
+	OutColor = MabaFgWarpPresent(MabaShown, MabaOutDepth, MabaLinearSampler, SvPosition.xy - MabaOutputRect.xy, MabaOutInfo,
+		MabaLastVP, MabaLastInvVP, MabaNewVP, MabaNewInvVP, MabaPresent.x);
+}

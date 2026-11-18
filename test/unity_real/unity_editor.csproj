@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!-- Compiles the Unity package's runtime C# against the REAL UnityEngine reference assemblies (Unity 2021.3, from the UnityEngine.Modules
+       NuGet package, about 3 MB, fetched by test/run_all.ps1 into UnityRefDir). Only uGUI is declared by hand (UguiStub.cs). -->
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework><LangVersion>9.0</LangVersion><Nullable>disable</Nullable>
+    <DefineConstants>ENABLE_LEGACY_INPUT_MANAGER;UNITY_2021_3_OR_NEWER</DefineConstants>
+    <NoWarn>CS0649;CS0169;CS0414;CS8981;CS0108;CS0067;CS1591</NoWarn><EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+    <UnityRefDir Condition="'$(UnityRefDir)'==''">$(LOCALAPPDATA)\maba_test_cache\unity_api\modules\lib\netstandard2.0</UnityRefDir>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="UguiStub.cs" />
+    <Compile Include="UnityEditorStub.cs" />
+    <Compile Include="..\..\integrations\unity\com.maba.upscaler3\Editor\*.cs" />
+    <Compile Include="..\..\integrations\unity\com.maba.upscaler3\Runtime\*.cs" />
+    <UnityDll Include="$(UnityRefDir)\*.dll" />
+    <Reference Include="@(UnityDll)" />
+  </ItemGroup>
+</Project>

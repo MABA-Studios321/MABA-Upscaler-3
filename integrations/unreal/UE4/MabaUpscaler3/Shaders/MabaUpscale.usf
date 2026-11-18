@@ -1,0 +1,30 @@
+// MABA Upscaler - UE post-tonemap upscale pixel shader.
+// Copyright 2026 MABA Studios. SPDX-License-Identifier: Apache-2.0
+#include "/Engine/Public/Platform.ush"
+
+// MABA_QUALITY is set to 0 or 1 by the C++ permutation dimension (FMabaUpscalePS::FQualityDim).
+#ifndef MABA_QUALITY
+#define MABA_QUALITY 0
+#endif
+
+#include "/Plugin/MabaUpscaler3/MabaCore.ush"
+
+Texture2D MabaInput;
+SamplerState MabaInputSampler;
+float4 MabaInputSize;    // xy = region size in texels, zw = 1 / texture extent
+float4 MabaParams;       // x = sharpness
+float4 MabaOutputRect;   // xy = output rect min in pixels, zw = 1 / output rect size
+
+// The output UV comes from the pixel position, so the shader does not depend on which
+// full-screen vertex shader the engine pairs it with.
+void MainPS(
+	float4 SvPosition : SV_POSITION,
+	out float4 OutColor : SV_Target0)
+{
+	float2 UV = (SvPosition.xy - MabaOutputRect.xy) * MabaOutputRect.zw;
+#if MABA_QUALITY
+	OutColor = MabaUpscaleQuality(MabaInput, MabaInputSampler, UV, MabaInputSize, MabaParams);
+#else
+	OutColor = MabaUpscaleFast(MabaInput, MabaInputSampler, UV, MabaInputSize, MabaParams);
+#endif
+}

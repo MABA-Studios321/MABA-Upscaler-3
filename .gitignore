@@ -1,0 +1,25 @@
+# build output
+build/
+*.apk
+*.idsig
+*.dex
+*.class
+*.keystore
+*.jks
+*.ppm
+# .NET test projects
+bin/
+obj/
+# Godot caches and test output
+.godot/
+render_out.txt
+render_out.txt.err
+# Unreal / editors / OS
+Intermediate/
+Saved/
+Binaries/
+DerivedDataCache/
+*.log
+.idea/
+.vs/
+Thumbs.db

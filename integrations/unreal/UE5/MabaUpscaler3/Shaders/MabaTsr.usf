@@ -1,0 +1,36 @@
+// MABA Upscaler 3 - Unreal temporal super-resolution resolve. Runs at OUTPUT resolution after the
+// tonemapper (input: jittered, finished LDR colour). Copyright 2026 MABA Studios. SPDX-License-Identifier: Apache-2.0
+#include "/Engine/Public/Platform.ush"
+
+// Unreal: reversed-Z infinite far depth, [0,1] NDC z, screen rows run top to bottom, camera-only motion
+// rebuilt from the depth with one current-clip -> previous-clip matrix.
+#define MABA_TSR_DEPTH_MODE 1
+#define MABA_TSR_VELOCITY_TEX 0
+#define MABA_TSR_Y_DOWN 1
+#include "/Plugin/MabaUpscaler3/MabaTsr.ush"
+
+Texture2D MabaInput;         // this frame's tonemapped colour (jittered), render resolution
+Texture2D MabaHistory;       // last frame's history, output resolution
+Texture2D MabaDepth;         // this frame's scene depth (reversed Z)
+Texture2D MabaPrevDepth;     // last frame's depth, output resolution (written by this pass)
+SamplerState MabaLinearSampler;
+float4x4 MabaCurToPrev;      // current clip -> previous clip, column-vector form (see C++)
+float4 MabaParams;           // y depth tolerance, z reset, w clip gamma
+float4 MabaRegion;           // xy = render size in texels
+float4 MabaOutInfo;          // xy = output size, zw = 1 / output size
+float4 MabaJitter;           // xy = this frame's jitter in render texels (content moved BY +jitter, y down)
+float4 MabaDepthRange;       // x = near plane
+
+void MainPS(
+	float4 SvPosition : SV_POSITION,
+	out float4 OutHistory : SV_Target0,
+	out float4 OutShown : SV_Target1,
+	out float OutDepth : SV_Target2)
+{
+	MabaTsrOut R = MabaTsrResolve(MabaInput, MabaHistory, MabaDepth, MabaPrevDepth, MabaInput,
+		MabaLinearSampler, SvPosition.xy, MabaParams, float2(0.0, 0.0), MabaRegion.xy, MabaOutInfo,
+		MabaJitter.xy, MabaDepthRange.xy, MabaCurToPrev, float4x4(1,0,0,0, 0,1,0,0, 0,0,1,0, 0,0,0,1));
+	OutHistory = R.hist;
+	OutShown = R.shown;
+	OutDepth = R.depth;
+}

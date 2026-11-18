@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 200" width="640" height="200" role="img" aria-label="MABA Upscaler 3 by MABA Studios">
+  <title>MABA Upscaler 3</title>
+  <rect width="640" height="200" rx="28" fill="#0E1116"/>
+
+  <!-- Mark: an "M" whose left half is low-resolution pixels and whose right half is reconstructed. -->
+  <g transform="translate(28 28)">
+    <!-- left leg: pixels -->
+    <rect x="0"  y="0"   width="26" height="26" fill="#22C5E6" opacity="0.45"/>
+    <rect x="0"  y="30"  width="26" height="26" fill="#22C5E6" opacity="0.55"/>
+    <rect x="0"  y="60"  width="26" height="26" fill="#22C5E6" opacity="0.50"/>
+    <rect x="0"  y="90"  width="26" height="26" fill="#22C5E6" opacity="0.60"/>
+    <rect x="0"  y="120" width="26" height="24" fill="#22C5E6" opacity="0.50"/>
+    <!-- left diagonal: stair-stepped pixels -->
+    <rect x="30" y="0"   width="20" height="30" fill="#22C5E6" opacity="0.60"/>
+    <rect x="40" y="30"  width="20" height="30" fill="#22C5E6" opacity="0.50"/>
+    <rect x="50" y="60"  width="20" height="30" fill="#22C5E6" opacity="0.65"/>
+    <!-- right diagonal and leg: smooth -->
+    <polygon points="60,90 84,90 118,0 94,0" fill="#22C5E6"/>
+    <rect x="118" y="0" width="26" height="144" fill="#22C5E6"/>
+  </g>
+
+  <g font-family="'Segoe UI', 'Helvetica Neue', Arial, sans-serif" fill="#FFFFFF">
+    <text x="208" y="92" font-size="48" font-weight="700" letter-spacing="1">MABA <tspan fill="#22C5E6">Upscaler 3</tspan></text>
+    <text x="210" y="128" font-size="17" fill="#9AA4B2">Temporal upscaling + Frame Gen 2x / 3x</text>
+    <text x="210" y="160" font-size="15" fill="#6B7684">MABA Studios</text>
+  </g>
+</svg>

@@ -1,0 +1,24 @@
+{
+	"FileVersion": 3,
+	"Version": 3,
+	"VersionName": "3.0.0-pre.1",
+	"FriendlyName": "MABA Upscaler 3 for UE5 (pre-alpha)",
+	"Description": "PRE-ALPHA, Unreal Engine 5: compiles on UE 5.6 and 5.8; the Blueprint API, settings menu, temporal resolve and Frame Generation (camera re-projection, 2x / 3x) ran in a game on 5.6 on an unlit test scene; 5.0 - 5.5 and lit scenes untested. Temporal super-resolution (render low with a jittered camera, accumulate at output resolution, sharpen) built for low-end mobile GPUs, with a single-pass spatial fallback. Dynamic mode holds your frame rate.",
+	"Category": "Rendering",
+	"CreatedBy": "MABA Studios",
+	"CreatedByURL": "",
+	"DocsURL": "",
+	"MarketplaceURL": "",
+	"SupportURL": "",
+	"CanContainContent": false,
+	"IsBetaVersion": false,
+	"IsExperimentalVersion": true,
+	"EnabledByDefault": true,
+	"Modules": [
+		{
+			"Name": "MabaUpscaler3",
+			"Type": "Runtime",
+			"LoadingPhase": "PostConfigInit"
+		}
+	]
+}
